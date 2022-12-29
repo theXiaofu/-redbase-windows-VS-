@@ -61,9 +61,17 @@ RC RMFileScan::getNextRcd(RMRecord& rcd)
 				int len;
 				char* addr0;
 				rmfile_->getRcd(curr_.page(),curr_.slot(),addr0,len);	/* 获取一条记录 */
+				//rmfile_->getRcd(1, 4, addr0, len);
+				//printf("%d,%d len: %d\n", 1, 4, len);
 				rcd.set(addr0, len, curr_);
 				addr = rcd.rawPtr();
-				if (comp_->eval(addr + offset_, op_, val_)) return 0;
+				//printf("%s,%s\n", addr + offset_, val_);
+				if (comp_->eval(addr + offset_, op_, val_)) 
+				{
+					//rmfile_->getRcd(1, 4, addr0, len);
+					//printf("%d,%d len: %d\n", 1, 4, len);
+					return 0;
+				}
 				/* 否则的话,获取下一条记录 */
 			}
 			//if()

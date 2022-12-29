@@ -197,7 +197,7 @@ RC RMFileHandle::insertRcd(const Ptr recd, int len,int &page_num,int &  rec_num)
 	//	}
 	//	cout << endl;
 	//}
-	strcpy(&addr[recAddr], recd);
+	//strcpy(&addr[recAddr], recd);
 	(hdr->sum)++;
 	rec_num = hdr->sum;
 	hdr->remain -= (sizeof(int) * 2 + len);
@@ -281,13 +281,13 @@ RC RMFileHandle::updateRcd(const RMRecord& rcd) {
 	Ptr addr = page.rawPtr();
 
 	RMPageHdrEx* hdr = (RMPageHdrEx*)addr;
-	char* curr = &(addr[sizeof(int) * 2 * (hdr->sum - 1) + sizeof(RMPageHdrEx)]);
+	char* curr = &(addr[sizeof(int) * 2 * (pos - 1) + sizeof(RMPageHdrEx)]);
 	// 强制类型转换成int类型，方便取值
 	int* beginAddr = (int*)curr;
 	curr = curr + sizeof(int);
 	int* len = (int *)curr;
 	rcd.getData(src);
-	memcpy(beginAddr, src, *len);
+	memcpy(&addr[*beginAddr], src, *len);
 	page.setDirty();
 	return 0;
 }
@@ -305,7 +305,8 @@ RC RMFileHandle::getRcd(Page page_num,int num ,char*&addr_,int& length)
 	addr = page.rawPtr();
 	hdr = (RMPageHdrEx*)addr;
 	addr = page.rawPtr();
-
+	//if (page_num == 1 && num == 4)
+		//system("pause");
 	// 页的第一块是头部信息
 	hdr = (RMPageHdrEx*)addr;
 	char* curr = &(addr[sizeof(int) * 2 * (num - 1) + sizeof(RMPageHdrEx)]);

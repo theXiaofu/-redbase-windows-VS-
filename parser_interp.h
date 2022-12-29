@@ -27,6 +27,7 @@ struct AggRelAttr {
 struct RelAttr {
 	char* relname;
 	char* attrname;
+	//int* cost;
 	friend std::ostream& operator<<(std::ostream& s, const RelAttr& ra);
 };
 

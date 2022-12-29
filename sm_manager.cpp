@@ -122,6 +122,10 @@ RC SMManager::createTable(const char* relname, int count, AttrInfo* infos)
 	int page0;
 	int slot0;
 	rel_->insertRcd(reinterpret_cast<Ptr>(&rel), sizeof(DataRel), page0, slot0);
+	int len;
+	char* s0;
+	//rel_->getRcd(page0, slot0, s0, len);
+	//printf("%d %d len:%d\n", page0,slot0,len);
 	rid.set(page0, slot0);
 	return 0;
 }
@@ -320,8 +324,10 @@ RC SMManager::load(const char* relname, const char* filename)
 	}
 	while ((line = getline(fd)) != nullptr) {
 		char* item;
+		//printf("%s\n", item);
 		for (int i = 0; i < nattrs; i++) {
 			item = getitem(line);
+			//printf("%s\n", item);
 			switch (_attrs[i].type)
 			{
 			case INT0:

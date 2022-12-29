@@ -35,7 +35,9 @@ RC RMRecord::set(Ptr src, uint len, RID rid)
 	if (addr_ == nullptr) addr_ = (char*)malloc(sizeof(char) * len);
 	memcpy(addr_, src, len);
 	return 0;
+	//strcpy(addr_, addr_);
 }
+
 
 RC RMRecord::getData(Ptr& p) const
 {

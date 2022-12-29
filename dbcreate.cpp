@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 {
 	RC rc;
 	string s;
-	cout << "please type your dbname"<<endl;
+	cout << "欢迎进入数据库创建界面，please type your dbname"<<endl;
 	cin >> s;
 	if (s.length()<=0) {
 		cerr << "usage: " << s << " <dbname>\n";
