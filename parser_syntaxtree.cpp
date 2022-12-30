@@ -127,7 +127,45 @@ bool SyntaxTree::parseDML(NODE*& node)
 {
 	bool succ = parseQuery(node);
 	if (!succ) succ = parseInsert(node);
+	if (!succ) succ = parseDelete(node);
 	return succ;
+}
+//
+// parseDelete - 解析delete语句
+//  query -> RW_SELECT non_mt_select_clause RW_FROM non_mt_relation_list opt_where_clause 
+//				opt_order_by_clause opt_group_by_clause
+//	delete -> DELETE FROM 表名称 WHERE 列名称 = 值
+//
+bool SyntaxTree::parseDelete(NODE*& node)
+{
+	
+	TokenPtr ta = peek(1);
+	if (ta && ta->type == RW_DELETE) {
+		discard(1);
+		//NODE* clause;
+		//parseNonmtSelectClause(clause);
+		
+		ta = next();
+		if (!ta || ta->type != RW_FROM) goto tg;
+		NODE* relattrlist, * condlist;
+		parseNonmtRelationList(relattrlist);
+			
+		parseOptWhereClause(condlist);
+		char * relname = relattrlist->u.LIST.curr->u.RELATION.relname;
+		/* order by和group by可以交换位置 */
+		//parseOptOrderByClause(orderby);
+		//parseOptGroupByClause(groupby);
+		//if (orderby == nullptr && groupby != nullptr) {
+			//parseOptOrderByClause(orderby);
+		//}
+
+		node = delete_node(relname, condlist);
+		return true;
+	}
+	node == nullptr;
+	return false;
+tg:
+	throw GeneralError("Something wrong with the delete. Please check your input.");
 }
 
 //
@@ -305,18 +343,23 @@ void SyntaxTree::parseRelAttrOrValue(NODE*& node)
 //
 bool SyntaxTree::parseRelAttr(NODE*& node)
 {
-	TokenPtr ta = next(), tb;
+	TokenPtr ta = peek(1), tb;
 	if (ta && ta->type == RW_STRING) {
-		tb = peek(1);
+		tb = peek(2);
 		if (!tb) goto tg;
 		if (tb->type == RW_DOT) {
+			next();
+			tb = peek(1);
 			discard(1);
 			tb = next();
 			if (!tb || tb->type != RW_STRING) goto tg;
 			node = relattr_node(ta->content, tb->content);
 		}
 		else
+		{
+			next();
 			node = relattr_node(nullptr, ta->content);
+		}
 		return true;
 	}
 	node = nullptr;
@@ -567,6 +610,7 @@ bool SyntaxTree::parseNonmtValueList(NODE*& node)
 bool SyntaxTree::parseValue(NODE*& node)
 {
 	TokenPtr val = next();
+	//next();
 	switch (val->type) {
 	case T_STRING:
 		node = value_node(STRING0, val->content);

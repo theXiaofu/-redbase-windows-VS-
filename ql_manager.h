@@ -30,6 +30,8 @@ public:
 		RelAttr orderattr,               // the single attr ordered by
 		bool group,
 		RelAttr groupattr);
+	RC Delete( char* relname, int nconditions, const Condition conditions[]);
 };
+	
 
 #endif /* QL_MANAGER_H */

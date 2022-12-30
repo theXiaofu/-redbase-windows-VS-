@@ -43,6 +43,7 @@ RC IdxWrapper::next(uint8_t* data)
 		file_->getRcd(rid.page(),rid.slot(),addr,len);
 		rcd.set(addr, len, rid);
 		ptr = rcd.rawPtr();
+		rcd.getRid(steam_rid);
 		int i = 1;
 		/* 使用各种条件来过滤数据 */
 		for (; i < comps_.size(); i++) {
@@ -110,6 +111,7 @@ RC RcdWrapper::next(uint8_t* data)
 		errval = scan_.getNextRcd(rcd);
 		if (errval == RM_EOF) return QL_EOF;
 		ptr = rcd.rawPtr();
+		rcd.getRid(steam_rid);
 		int i = 0;
 		for (; i < comps_.size(); i++) {
 			if (!comps_[i]->eval(ptr + loffsets_[i], conds_[i].op, conds_[i].rhsValue.data)) break;
@@ -199,6 +201,7 @@ RC CombWrapper::next(uint8_t* data)
 			if (errval == QL_EOF) return QL_EOF;
 		}
 		memcpy(data, ldata_, lhs_->rcdlen_);
+		steam_rid = lhs_->steam_rid;
 		int i = 0;
 		for (; i < comps_.size(); i++) {
 			if (!comps_[i]->eval(data + loffsets_[i], conds_[i].op, data + roffsets_[i]))

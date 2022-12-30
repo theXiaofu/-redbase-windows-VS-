@@ -60,12 +60,17 @@ public:
 	int rcdlen() { return rcdlen_; }
 public:
 	void appendCond(const Condition cond) { conds_.push_back(cond); }
+public:
+	RID steam_rid;
 protected:
 	int rcdlen_; /* 记录的长度 */
 	map<const char*, int, CharCmp> indicator_;
 	vector<Comp*> comps_;
 	vector<Condition> conds_;
 	vector<DataAttr> attrs_;
+	//int page;
+	//int slot;
+	//RID steam_rid;
 };
 
 
@@ -87,6 +92,8 @@ private:
 	IX_IndexHandle index_;
 	vector<int> loffsets_; /* 条件左侧的变量在记录中的偏移量 */
 	const char* pathname_;
+	//int page;
+	//int slot;
 };
 
 class RcdWrapper : public Stream
@@ -112,6 +119,8 @@ private:
 	RMFilePtr file_;
 	vector<int> loffsets_;	/* 条件左侧的变量在记录中的偏移量 */
 	const char* pathname_;
+	//int page;
+	//int slot;
 };
 
 //
@@ -143,7 +152,7 @@ public:
 		auto& last = attrs_.back();
 		rcdlen_ = last.offset + last.len;
 	}
-
+	
 	~CombWrapper();
 public:
 	virtual RC open();
@@ -158,6 +167,8 @@ private:
 	vector<int> loffsets_;
 	vector<int> roffsets_;
 	uint8_t* ldata_;
+	//int page;
+	//int slot;
 };
 
 

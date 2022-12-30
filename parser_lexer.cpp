@@ -23,6 +23,7 @@ static vector<TokenDef> tokens = {
 	{ RW_SELECT, "(select)|(SELECT)\\b" },
 	{ RW_WHERE, "(where)|(WHERE)\\b" },
 	{ RW_FROM, "(from)|(FROM)\\b" },
+	{RW_DELETE,"(delete)|(DELETE)\\b"},
 
 	{ RW_COUNT, "(count)|(COUNT)\\b" },
 	{ RW_AVG, "(avg)|(AVG)\\b" },

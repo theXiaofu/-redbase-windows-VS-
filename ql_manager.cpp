@@ -5,6 +5,7 @@
 #include "ql_error.h"
 #include "printer.h"
 #include "ql_query.h"
+#include <vector>
 using namespace std;
 
 #define MAXDATAATTR		(3 * MAXATTRS)
@@ -81,4 +82,55 @@ RC QLManager::select(int nselattrs, const AggRelAttr selattrs[],
 	return 0;
 }
 
+RC QLManager::Delete( char* relname, int nconditions, const Condition conditions[])
+{
+	int nselattrs = 0;
+	AggRelAttr selattrs[MAXATTRS];
+	DataAttr attrs[MAXATTRS];
+	smManager.lookupAttrs(relname, nselattrs, attrs);
+	for (int i = 0; i < nselattrs; ++i)
+	{
+		selattrs[i].relname = attrs[i].relname;
+		selattrs[i].attrname = attrs[i].attrname;
+		selattrs[i].func = NO_F;
+	}
+	int nrelations = 1; /* 表的数目 */
+	char* relations[MAXATTRS]; /* 表的名称 */
+	relations[0] = relname;
+	int order = 0; /* 升序or降序 */
+	RelAttr orderattr; /* 按照orderAttr来排序 */
+	bool group = false;
+	RelAttr groupattr; /* 按照groupAttr来分组 */
+	Query* query = query_new(nselattrs, selattrs, nrelations, relations,
+		nconditions, conditions, order, orderattr, group, groupattr);
+	Printer print(query->discs(), query->discsSize()); /* Printer具体负责输出 */
+	query->open();
+	Item it;
+	RC errval;
+	print.printHeader();
+	RMFilePtr rmf;
+	//RID rid;
+	vector<RID> rids;
+	//rmManager.openFile(relname,rmf);
+	for (; ; ) {
+		errval = query->next(it);
+		//it.rid;
+		//rmf->deleteRcd(it.rid);
+		rids.push_back(it.rid);
+		if (errval == QL_EOF) break;
+		print.print(it.data);
+	}
+
+	print.printFooter();
+	query->close();
+	query_free(query);
+	rmManager.openFile(relname, rmf);
+	for (int i = 0; i < rids.size(); ++i)
+	{
+		rmf->deleteRcd(rids[i]);
+	}
+	rmManager.closeFile(rmf);
+	return 0;
+	//relAttrs
+}
 

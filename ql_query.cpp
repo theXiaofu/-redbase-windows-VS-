@@ -336,6 +336,7 @@ RC Query::next(Item& it)
 		for (; ; ) {
 			data = (uint8_t*)malloc(len);
 			errval = stream_->next(data);
+			it.rid = stream_->steam_rid;
 			if (errval == QL_EOF) {
 				free(data);
 				break;

@@ -28,6 +28,7 @@ private:
 	bool parseCreateIndex(NODE*&);
 	bool parseInsert(NODE*&);
 	bool parseQuery(NODE*&);
+	bool parseDelete(NODE*&);
 	bool parseDropTable(NODE*&);
 	bool parseDropIndex(NODE*&);
 	bool parseNonmtAttrtypeList(NODE*&);

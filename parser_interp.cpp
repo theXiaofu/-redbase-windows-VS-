@@ -412,6 +412,28 @@ int interp(NODE* n)
 		else
 			errval = smManager.help();
 		break;
+	case N_DELETE:
+	{
+		
+
+		
+		int nconditions = 0; /* 条件的数目 */
+		Condition conditions[MAXCONDS];
+		
+
+		/* 开始解析所选择的属性 */
+		
+
+		/* 开始解析条件 */
+		nconditions = mk_conditions(n->u.DELETe.conditionlist, MAXCONDS, conditions);
+		if (nconditions < 0) {
+			print_error("select", nconditions);
+			break;
+		}
+		/* 开始调用delete函数 */
+		errval = qlManager.Delete(n->u.DELETe.relname, nconditions, conditions);
+		break;
+	}
 	case N_QUERY: /* 查询语句 */
 	{
 		int nselattrs = 0;

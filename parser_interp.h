@@ -45,5 +45,6 @@ struct Condition {
 };
 
 int interp(NODE* n);
-#endif /* PARSER_INTERP_H */
+/* PARSER_INTERP_H */
+#endif 
 

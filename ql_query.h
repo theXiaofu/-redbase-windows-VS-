@@ -12,6 +12,7 @@ using namespace std;
 
 struct Item : public noncopyable
 {
+	RID rid;
 	int rcdlen;
 	uint8_t* data;
 };

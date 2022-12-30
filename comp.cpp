@@ -1,7 +1,7 @@
 #include <string.h>
 #include <math.h>
 #include "comp.h"
-
+#include <stdio.h>
 #define EPSILON 0.000001
 
 
@@ -62,7 +62,8 @@ bool FloatComp::eval(const void* lhs, Operator op, const void* rhs)
 bool StrComp::eval(const void* lhs, Operator op, const void* rhs)
 {
 	if (op == NO_OP) return true;
-	char* lval = (char*)lhs, * rval = (char*)rhs;
+	char* lval = (char*)lhs; char* rval = (char*)rhs;
+	//printf("%s,%s,%d\n", lhs, rhs, strncmp(lval, rval,len_));
 	switch (op)
 	{
 	case EQ_OP: return strncmp(lval, rval, len_) == 0;
