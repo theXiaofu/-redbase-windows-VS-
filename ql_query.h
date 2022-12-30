@@ -19,7 +19,8 @@ struct Item : public noncopyable
 
 //
 // ItemDiscrip 用于标记属性
-// 
+//
+ 
 struct ItemDiscrip
 {
 	AggFun func;		/* 聚集函数 */

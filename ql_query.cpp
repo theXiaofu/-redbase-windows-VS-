@@ -12,9 +12,11 @@ extern SMManager smManager;
 static Condition condspool[MAXCONDS];
 using Conds = tuple<int, Condition*>;
 
+
 //
 // lookupConds - 查找有关于relname这张表的所有的一元条件,relname表示表的名称
 //
+
 static Conds lookupUnaryConds(const char* relname, int nconds, const Condition conditions[])
 {
 	int count = 0; /* 一元条件的数目 */

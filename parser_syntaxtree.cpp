@@ -5,6 +5,7 @@
 //
 // buildSyntaxTree - 构建一棵语法树
 //
+
 NODE* SyntaxTree::buildSyntaxTree()
 {
 	NODE* node = nullptr;

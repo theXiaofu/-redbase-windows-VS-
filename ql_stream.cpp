@@ -12,7 +12,7 @@ IdxWrapper::IdxWrapper(const char* pathname, const DataAttr& idxattr, Operator o
 	: Stream(nattrs, attrs, nconds, conds), pathname_(pathname)
 {
 	rmManager.openFile(pathname_, file_);
-	ixManager.OpenIndex(pathname_, idxattr.idxno, index_); /* 打开索引文件 */
+	ixManager.OpenIndex(pathname_, idxattr.idxno, index_);  /* 打开索引文件 */
 	scan_.OpenScan(index_, op, val);
 }
 

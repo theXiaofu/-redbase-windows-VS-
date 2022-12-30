@@ -3,6 +3,7 @@
 
 #include "redbase.h"
 
+
 class Comp 
 {
 	public:

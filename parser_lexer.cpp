@@ -7,6 +7,7 @@
 #include "parser_token.h"
 using namespace std;
 
+
 static vector<TokenDef> tokens = {
 	{ RW_SPACE, "[[:blank:]]+"},
 	{ RW_CREATE, "(create)|(CREATE)\\b" },

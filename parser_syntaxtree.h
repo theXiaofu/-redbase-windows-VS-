@@ -6,6 +6,7 @@
 #include "parser_node.h"
 #include "parser_token.h"
 
+
 class SyntaxTree {
 public:
 	SyntaxTree(LexerPtr& lexer)
