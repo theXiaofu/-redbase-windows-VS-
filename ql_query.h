@@ -16,11 +16,10 @@ struct Item : public noncopyable
 	int rcdlen;
 	uint8_t* data;
 };
-
 //
 // ItemDiscrip 用于标记属性
 //
- 
+
 struct ItemDiscrip
 {
 	AggFun func;		/* 聚集函数 */

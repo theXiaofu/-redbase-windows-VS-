@@ -9,7 +9,6 @@
 #include "sm_manager.h"
 using namespace std;
 
-
 struct Value;
 struct Condition;
 struct AggRelAttr;

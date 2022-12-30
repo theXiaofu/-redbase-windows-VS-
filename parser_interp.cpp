@@ -13,7 +13,6 @@ extern QLManager qlManager;
 extern PFManager pfManager;
 extern bool stop;
 
-
 #define E_OK                0
 #define E_INCOMPATIBLE      -1
 #define E_TOOMANY           -2

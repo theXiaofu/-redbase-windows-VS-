@@ -4,7 +4,6 @@
 #include <stdio.h>
 #define EPSILON 0.000001
 
-
 class IntComp : public Comp {
 public:
 	IntComp() : Comp(INT0, sizeof(int)) {}

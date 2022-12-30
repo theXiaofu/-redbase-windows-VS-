@@ -16,6 +16,7 @@ IdxWrapper::IdxWrapper(const char* pathname, const DataAttr& idxattr, Operator o
 	scan_.OpenScan(index_, op, val);
 }
 
+
 RC IdxWrapper::open()
 {
 	/* 预处理好各种条件 */

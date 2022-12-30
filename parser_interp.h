@@ -11,7 +11,6 @@ struct AttrInfo {
 	int len;
 };
 
-
 struct Value {
 	AttrType type;
 	void* data;

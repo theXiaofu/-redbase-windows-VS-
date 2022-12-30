@@ -12,7 +12,6 @@ extern SMManager smManager;
 static Condition condspool[MAXCONDS];
 using Conds = tuple<int, Condition*>;
 
-
 //
 // lookupConds - 查找有关于relname这张表的所有的一元条件,relname表示表的名称
 //

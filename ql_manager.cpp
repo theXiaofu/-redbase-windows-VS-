@@ -12,7 +12,6 @@ using namespace std;
 #define MAXCONDITIONS	(2 * MAXATTRS)
 #define MAXCHAR			1024
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~Utilitys~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 extern PFManager pfManager;
 extern RMManager rmManager;
 extern IX_Manager ixManager;
