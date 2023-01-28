@@ -1,6 +1,10 @@
 # -redbase-windows-VS-
 经过不断的点滴，基于redbase简单实现了从底层开发到最后实现增删改查并解析语法词法。
 
+#演示视频
+
+[演示视频](https://github.com/theXiaofu/-redbase-windows-VS-/blob/main/db.mp4)
+
 #数据库 sql语句：
 1.进入到数据库创建界面输入数据库名
 
